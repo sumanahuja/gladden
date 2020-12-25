@@ -146,7 +146,10 @@ public class DrawerActivity extends AppCompatActivity implements  NavigationView
                 break;
 
             case R.id.header_CartBtn:
+
                 Log.i("header_CartBtn", "clicked");
+                fregmentContainer.removeAllViews();
+                replaceFragment(new CartBasketFragment());
                 break;
         }
         return true;
@@ -213,6 +216,7 @@ public class DrawerActivity extends AppCompatActivity implements  NavigationView
                     fragment = new FragmentContactUs();
                     break;
                 case "header_CartBtn":
+                    fragment = new CartBasketFragment();
                     break;
                 case "detailpage":
                     fragment = new DetailPageFragment();

@@ -711,7 +711,11 @@ public class DetailPageFragment extends Fragment implements AdapterView.OnItemSe
                     JSONObject jsonObject = new JSONObject(response);
                     if (jsonObject.getString("status").equals("true")) {
                         Toast.makeText(context, "add to card , total items" + jsonObject.getString("totalitems"), Toast.LENGTH_SHORT).show();
-
+                        SharedPreferences prefs = context.getSharedPreferences("data", 0);
+                        SharedPreferences.Editor editor = prefs.edit();
+                        editor.putString("app_token", app_token);
+                        editor.putString("cart_id", jsonObject.getString("cart_id"));
+                        editor.apply();
 
                     } else if (jsonObject.getString("status").equals("false")) {
                      //   Toast.makeText(context, "" + jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
@@ -744,6 +748,7 @@ public class DetailPageFragment extends Fragment implements AdapterView.OnItemSe
                     e.printStackTrace();
                     USER_ID="";
                 }
+
                Log.i("map",USER_ID+app_token+"\t"+dim+"\t"+height+"\t"+quantity+"\t"+product_id+"\t"+list_url_name);
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("app_token",app_token);

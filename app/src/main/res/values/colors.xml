@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#039</color>
+    <color name="colorPrimaryDark">#2D028E</color>
+    <color name="colorAccent">#DFB024</color>
+    <color name="Gray">#A1A09B</color>
+    <color name="DarkGray">#201C1C</color>
+    <color name="White">#EAE8E8</color>
+    <color name="LightAccent">#9F9F4D</color>
+    <color name="colorAccent2">#DF249A</color>
+    <color name="bg1">#b9edbd</color>
+    <color name="bg2">#ccf1ff</color>
+    <color name="features_bg">#CC3300</color>
+
+
+</resources>

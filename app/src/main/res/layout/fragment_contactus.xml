@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/White"
+    tools:context=".FragmentAbout">
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/childExtraPadding"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/childExtraPadding"
+            android:background="@color/colorAccent"
+            android:gravity="center"
+            android:padding="@dimen/childPadding"
+            android:text="CONTACT-US"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat"
+        android:layout_marginLeft="@dimen/childPadding"
+        android:layout_marginRight="@dimen/childPadding"
+        android:orientation="vertical">
+
+
+    <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/childPadding"
+        android:textStyle="bold"
+    android:text="@string/phone"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/childPadding"
+            android:text="@string/phonename"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/childPadding"
+            android:textStyle="bold"
+            android:text="@string/email"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/childPadding"
+            android:text="@string/emailname"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/childPadding"
+            android:textStyle="bold"
+            android:text="@string/website"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/childPadding"
+            android:text="@string/websitename"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/parentMargin"
+            android:gravity="center"
+            android:textAllCaps="true"
+            android:textSize="25dp"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            android:text="Send Message"/>
+
+        <EditText
+            android:id="@+id/contact_us_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/childPadding"
+            android:padding="@dimen/childExtraPadding"
+            style="@style/editTextTheme"
+            android:background="@drawable/edit_text_border"
+            android:hint="@string/name" />
+
+        <EditText
+            android:id="@+id/contact_us_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/editTextTheme"
+            android:padding="@dimen/childExtraPadding"
+            android:layout_marginBottom="@dimen/childPadding"
+            android:background="@drawable/edit_text_border"
+            android:hint="@string/email" />
+
+        <EditText
+            android:id="@+id/contact_us_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/editTextTheme"
+            android:padding="@dimen/childExtraPadding"
+            android:layout_marginBottom="@dimen/childPadding"
+            android:background="@drawable/edit_text_border"
+            android:hint="@string/phone" />
+
+        <EditText
+            android:id="@+id/contact_us_subject"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/editTextTheme"
+            android:padding="@dimen/childExtraPadding"
+            android:layout_marginBottom="@dimen/childPadding"
+            android:background="@drawable/edit_text_border"
+            android:hint="@string/subject" />
+
+        <EditText
+            android:id="@+id/contact_us_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/editTextTheme"
+            android:padding="@dimen/childExtraPadding"
+            android:layout_marginBottom="@dimen/childPadding"
+            android:background="@drawable/edit_text_border"
+            android:hint="@string/message"
+            android:minLines="4" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/parentMargin"
+            android:layout_gravity="center"
+            android:id="@+id/contact_us_send"
+            android:elevation="@dimen/childPadding"
+            android:textColor="@color/White"
+            android:background="@drawable/button_bg"
+            android:text="Send">
+
+        </Button>
+
+    </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".DrawerActivity"
+    >
+    <item android:id="@+id/user"
+        android:title="user"
+        app:showAsAction="always"
+        android:icon="@drawable/login"/>
+    <item
+        android:title="Add to Cart "
+        android:id="@+id/header_CartBtn"
+        android:icon="@drawable/cart"
+        app:actionLayout="@layout/custom_action_item_layout"
+        app:showAsAction="always" />
+    <group >
+        <item android:id="@+id/about"
+            android:title="About" android:visible="false" />
+        <item android:title="Register Your Warranty" android:id="@+id/warranty"  />
+        <item android:title="Shipping Return Policy" android:id="@+id/return_policy"
+            tools:ignore="HardcodedText" />
+        <item android:title="Contact Us" android:id="@+id/contact_us" android:visible="false"/>
+        <item android:title="Retailer Opportunities"  android:id="@+id/retailer" android:visible="false" />
+    </group>
+</menu>

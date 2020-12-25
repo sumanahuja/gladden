@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="parentMargin">16dp</dimen>
+    <dimen name="childPadding">5dp</dimen>
+    <dimen name="childExtraPadding">10dp</dimen>
+    <dimen name="navHeaderHeight">176dp</dimen>
+</resources>

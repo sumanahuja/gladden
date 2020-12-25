@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/White"
+    android:orientation="vertical"
+    tools:context=".ProductRegistrationFragment">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/childExtraPadding"
+        android:background="@color/colorAccent"
+        android:gravity="center"
+        android:padding="@dimen/childPadding"
+        android:text="Product Registration"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="@dimen/childExtraPadding"
+        android:background="@android:color/darker_gray" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/childPadding"
+            android:layout_marginRight="@dimen/childPadding"
+            android:padding="@dimen/childExtraPadding"
+            android:background="@drawable/edit_text_border"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_contact_info"
+                android:layout_width="match_parent"
+                android:paddingBottom="@dimen/childExtraPadding"
+                android:layout_height="wrap_content"
+                android:text="Contact Information" />
+            <EditText
+                android:id="@+id/et_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:background="@drawable/edit_text_border"
+                android:textColor="@color/colorPrimary"
+                android:layout_marginBottom="@dimen/childExtraPadding"
+                android:padding="@dimen/childExtraPadding"
+                android:inputType="textPersonName"
+                android:hint="Your Name:" />
+            <EditText
+                android:id="@+id/et_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/childExtraPadding"
+                android:ems="10"
+                android:background="@drawable/edit_text_border"
+                android:textColor="@color/colorPrimary"
+                android:padding="@dimen/childExtraPadding"
+                android:inputType="textEmailAddress"
+                android:hint="Your EMail:" />
+            <EditText
+                android:id="@+id/et_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/childExtraPadding"
+                android:ems="10"
+                android:background="@drawable/edit_text_border"
+                android:textColor="@color/colorPrimary"
+                android:padding="@dimen/childExtraPadding"
+                android:inputType="phone"
+                android:hint="Your Phone:"  />
+            <EditText
+                android:id="@+id/et_city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:layout_marginBottom="@dimen/childExtraPadding"
+                android:background="@drawable/edit_text_border"
+                android:textColor="@color/colorPrimary"
+                android:padding="@dimen/childExtraPadding"
+                android:inputType="textPersonName"
+                android:hint="City:" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_border"
+                android:padding="2dp"
+                android:layout_marginBottom="@dimen/childExtraPadding"
+                android:orientation="vertical">
+            <Spinner
+                android:id="@+id/spinner_state"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dropdown"
+                android:theme="@style/SpinnerTheme"
+                android:padding="@dimen/childExtraPadding"
+                android:textColor="@color/colorPrimary"
+
+                />
+        </LinearLayout>
+            <EditText
+                android:id="@+id/et_zipCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:layout_marginBottom="@dimen/childExtraPadding"
+                android:background="@drawable/edit_text_border"
+                android:textColor="@color/colorPrimary"
+                android:padding="@dimen/childExtraPadding"
+                android:inputType="number"
+                android:hint="ZipCode:" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/childPadding"
+            android:layout_marginRight="@dimen/childPadding"
+            android:padding="@dimen/childExtraPadding"
+            android:layout_marginTop="@dimen/childPadding"
+            android:background="@drawable/edit_text_border"
+            android:orientation="vertical">
+   <TextView
+        android:id="@+id/tv_product_info"
+        android:layout_width="match_parent"
+        android:paddingBottom="@dimen/childExtraPadding"
+        android:layout_height="wrap_content"
+       android:layout_marginBottom="@dimen/childPadding"
+        android:text="Product Information" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_border"
+                android:padding="2dp"
+                android:layout_marginBottom="@dimen/childExtraPadding"
+                android:orientation="vertical">
+                <Spinner
+                    android:id="@+id/spinner_model"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:spinnerMode="dropdown"
+                    android:theme="@style/SpinnerTheme"
+                    android:padding="@dimen/childExtraPadding"
+                    android:textColor="@color/colorPrimary"
+                    />
+            </LinearLayout>
+
+            <EditText
+            android:id="@+id/et_serialNo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/childExtraPadding"
+            android:ems="10"
+            android:background="@drawable/edit_text_border"
+            android:textColor="@color/colorPrimary"
+            android:padding="@dimen/childExtraPadding"
+            android:inputType="textEmailAddress"
+            android:hint="Product Serial Number:" />
+        <EditText
+            android:id="@+id/et_invoice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/childExtraPadding"
+            android:ems="10"
+            android:background="@drawable/edit_text_border"
+            android:textColor="@color/colorPrimary"
+            android:padding="@dimen/childExtraPadding"
+            android:inputType="phone"
+            android:hint="Invoice Number:"  />
+
+        <EditText
+            android:id="@+id/et_dOP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:layout_marginBottom="@dimen/childExtraPadding"
+            android:background="@drawable/edit_text_border"
+            android:textColor="@color/colorPrimary"
+            android:padding="@dimen/childExtraPadding"
+            android:clickable="true"
+            android:editable="false"
+            android:hint="Date Of Purchase:" />
+        <EditText
+            android:id="@+id/et_dealerName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:layout_marginBottom="@dimen/childExtraPadding"
+            android:background="@drawable/edit_text_border"
+            android:textColor="@color/colorPrimary"
+            android:padding="@dimen/childExtraPadding"
+            android:inputType="textPersonName"
+            android:hint="Dealer Name:" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/btn_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:theme="@style/ButtonStyle"
+                android:layout_marginRight="20dp"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/childExtraPadding"
+                android:padding="@dimen/childExtraPadding"
+                android:layout_gravity="center"
+                android:text="BACK" />
+            <Button
+                android:id="@+id/btn_register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:theme="@style/ButtonStyle"
+                android:layout_marginTop="40dp"
+                android:padding="@dimen/childExtraPadding"
+                android:layout_marginBottom="40dp"
+                android:layout_gravity="center"
+                android:text="REGISTER" />
+        </LinearLayout>
+
+    </LinearLayout>
+    </ScrollView>
+</LinearLayout>

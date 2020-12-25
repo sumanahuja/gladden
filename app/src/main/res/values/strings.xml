@@ -1,0 +1,99 @@
+<resources>
+    <string name="app_name">Gladden Mattresses</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="name">Name:</string>
+    <string name="email">Email:</string>
+    <string name="phone">Phone No.:</string>
+    <string name="subject">Subject:</string>
+    <string name="website">Website:</string>
+    <string name="message">Enter Your Message:</string>
+
+    <string name="phonename">+91 8588828663</string>
+    <string name="emailname">Enquiry@gladdenmattresses.com</string>
+    <string name="websitename">www.gladdenmattresses.com</string>
+    <string name="my_profile">My Profile</string>
+    <string name="my_orders">My Orders</string>
+    <string name="logout">Logout</string>
+    <string name="loginRegister">Login / Register</string>
+
+    <string name="select_state">Select State</string>
+    <string name="Andhra_Pradesh">Andhra Pradesh</string>
+    <string name="Andaman_and_Nicobar_Islands">Andaman and Nicobar Islands</string>
+    <string name="Arunachal_Pradesh">Arunachal Pradesh</string>
+    <string name="Assam">Assam</string>
+    <string name="Bihar">Bihar</string>
+    <string name="Chandigarh">Chandigarh</string>
+    <string name="Chhattisgarh">Chhattisgarh</string>
+    <string name="Dadar_and_Nagar_Haveli">Dadar and Nagar Haveli</string>
+    <string name="Daman_and_Diu">Daman and Diu</string>
+    <string name="Delhi">Delhi</string>
+    <string name="Lakshadweep">Lakshadweep</string>
+    <string name="Puducherry">Puducherry</string>
+    <string name="Goa">Goa</string>
+    <string name="Gujarat">Gujarat</string>
+    <string name="Haryana">Haryana</string>
+    <string name="Himachal_Pradesh">Himachal Pradesh</string>
+    <string name="Jammu_and_Kashmir">Jammu and Kashmir</string>
+    <string name="Jharkhand">Jharkhand</string>
+    <string name="Karnataka">Karnataka</string>
+    <string name="Kerala">Kerala</string>
+    <string name="Ladakh">Ladakh</string>
+    <string name="Madhya_Pradesh">Madhya Pradesh</string>
+    <string name="Maharashtra">Maharashtra</string>
+    <string name="Manipur">Manipur</string>
+    <string name="Meghalaya">Meghalaya</string>
+    <string name="Mizoram">Mizoram</string>
+    <string name="Nagaland">Nagaland</string>
+    <string name="Odisha">Odisha</string>
+    <string name="Punjab">Punjab</string>
+    <string name="Rajasthan">Rajasthan</string>
+    <string name="Sikkim">Sikkim</string>
+    <string name="Tamil_Nadu">Tamil Nadu</string>
+    <string name="Telangana">Telangana</string>
+    <string name="Tripura">Tripura</string>
+    <string name="Uttar_Pradesh">Uttar Pradesh</string>
+    <string name="Uttarakhand">Uttarakhand</string>
+    <string name="West_Bengal">West Bengal</string>
+
+    <string-array name="states_array">
+        <item>@string/select_state</item>
+        <item>@string/Andaman_and_Nicobar_Islands</item>
+        <item>@string/Andhra_Pradesh</item>
+        <item>@string/Arunachal_Pradesh</item>
+        <item>@string/Assam</item>
+        <item>@string/Bihar</item>
+        <item>@string/Dadar_and_Nagar_Haveli</item>
+        <item>@string/Daman_and_Diu</item>
+        <item>@string/Delhi</item>
+        <item>@string/Goa</item>
+        <item>@string/Gujarat</item>
+        <item>@string/Haryana</item>
+        <item>@string/Himachal_Pradesh</item>
+        <item>@string/Jammu_and_Kashmir</item>
+        <item>@string/Jharkhand</item>
+        <item>@string/Karnataka</item>
+        <item>@string/Kerala</item>
+        <item>@string/Ladakh</item>
+        <item>@string/Lakshadweep</item>
+        <item>@string/Madhya_Pradesh</item>
+        <item>@string/Maharashtra</item>
+        <item>@string/Manipur</item>
+        <item>@string/Meghalaya</item>
+        <item>@string/Mizoram</item>
+        <item>@string/Nagaland</item>
+        <item>@string/Odisha</item>
+        <item>@string/Puducherry</item>
+        <item>@string/Punjab</item>
+        <item>@string/Rajasthan</item>
+        <item>@string/Sikkim</item>
+        <item>@string/Tamil_Nadu</item>
+        <item>@string/Telangana</item>
+        <item>@string/Tripura</item>
+        <item>@string/Uttar_Pradesh</item>
+        <item>@string/Uttarakhand</item>
+        <item>@string/West_Bengal</item>
+    </string-array>
+</resources>

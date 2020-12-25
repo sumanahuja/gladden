@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view"
+    android:id="@+id/mymenu"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:checkableBehavior="single" android:id="@+id/group">
+    <item
+        android:id="@+id/about"
+        android:checkable="true"
+        android:icon="@drawable/ic_arrow_forward"
+        android:title="About" />
+    <item
+        android:id="@+id/matresses"
+        android:checkable="true"
+        android:icon="@drawable/ic_arrow_forward"
+        android:title="Matresses">
+        <menu>
+            <item
+                android:id="@+id/spinalcare"
+                android:checkable="true"
+                android:icon="@drawable/ic_arrow_forward"
+                android:title="Spinal Care Series"></item>
+            <item
+                android:id="@+id/imperia"
+                android:checkable="true"
+                android:icon="@drawable/ic_arrow_forward"
+                android:title="Imperia Series"></item>
+            <item
+                android:id="@+id/compress"
+                android:checkable="true"
+                android:icon="@drawable/ic_arrow_forward"
+                android:title="Compress Series"></item>
+            <item
+                android:id="@+id/desire"
+                android:checkable="true"
+                android:icon="@drawable/ic_arrow_forward"
+                android:title="Desire Series"></item>
+        </menu>
+    </item>
+    <item
+
+        android:id="@+id/pillow"
+        android:checkable="true"
+
+        android:title="Pillows">
+        <menu>
+            <item
+                android:id="@+id/gladdenpillow"
+                android:checkable="true"
+                 android:icon="@drawable/ic_arrow_forward"
+                android:title="Gladden Pillows" />
+        </menu>
+        >
+    </item>
+    <item
+
+        android:id="@+id/product"
+        android:checkable="true"
+        android:icon="@drawable/ic_arrow_forward"
+        android:title="Product Registration"></item>
+    <item
+
+        android:id="@+id/contact"
+        android:checkable="true"
+        android:icon="@drawable/ic_arrow_forward"
+        android:title="Contact Us"></item>
+    </group>
+</menu>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="?actionBarSize"
+    android:id="@+id/toolbar2"
+    app:titleTextAppearance="@style/Toolbar.TitleText"
+    android:theme="@style/AppTheme.DarkActionBar"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:title="@string/app_name"
+    tools:ignore="MissingDefaultResource">
+
+
+</androidx.appcompat.widget.Toolbar>

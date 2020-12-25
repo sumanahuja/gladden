@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/matress_bg"
+    tools:context=".LoginFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="100dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Login To Gladden Mattresses"
+                android:gravity="center"
+                android:textSize="25dp"
+                android:background="@color/colorAccent"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Easily Using"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/childExtraPadding"
+                android:layout_marginTop="10dp"
+                android:textSize="15dp"
+                android:textColor="@color/DarkGray" />
+
+<!--            <com.facebook.login.widget.LoginButton-->
+<!--                android:id="@+id/login_button"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center_horizontal"-->
+<!--                android:textSize="20sp"-->
+<!--                android:layout_marginTop="15dp"-->
+<!--                android:layout_marginBottom="30dp"-->
+<!--                android:paddingTop="14dp"-->
+<!--                android:paddingBottom="14dp" />-->
+
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/sign_in_button"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/edit_text_border"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Or Using"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:textSize="15dp"
+                android:textColor="@color/DarkGray" />
+
+            <EditText
+                android:id="@+id/edtLoginId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/edit_text_border"
+                android:padding="@dimen/childExtraPadding"
+                android:textColor="@color/colorPrimary"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="10dp"
+                android:hint="User Name" />
+
+            <EditText
+                android:id="@+id/edtLoginPass"
+                android:textColor="@color/colorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_border"
+                android:padding="@dimen/childExtraPadding"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="10dp"
+                android:ems="10"
+                android:hint="Password"
+                android:inputType="textPassword" />
+            <TextView
+                android:id="@+id/txt_forgotPass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Forgot Password"
+                android:paddingRight="10dp"
+                android:textStyle="bold"
+                android:textColor="@color/colorAccent2"
+                android:layout_gravity="right"
+                android:clickable="true"
+                android:layout_marginTop="10dp"
+                />
+            <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:text="Login"
+                android:theme="@style/ButtonStyle"
+                />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/create_an_account"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="50dp"
+                    android:text="Create Account"
+                    android:textColor="@color/DarkGray"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"/>
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</FrameLayout>

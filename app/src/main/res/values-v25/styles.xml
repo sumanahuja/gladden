@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="SuperParent">
+
+        <item name="android:colorSecondary">@color/colorPrimary</item>
+
+    </style>
+    <style name="SuperParent" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorControlActivated">@color/colorAccent</item>
+        <item name="colorControlHighlight">@color/Gray</item>
+
+    </style>
+
+    <style name="AppTheme.DarkActionBar">
+        <item name="android:background">@color/White</item>
+
+        <item name="android:textColorPrimary">@color/colorPrimary</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="editTextTheme">
+        <item name="android:textColorSecondary">@color/colorPrimary</item>
+        <item name="android:textColorPrimary">@color/colorPrimary</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+
+    </style>
+</resources>

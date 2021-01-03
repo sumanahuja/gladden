@@ -127,19 +127,7 @@ public class DetailPageFragment extends Fragment implements AdapterView.OnItemSe
 // ...
             // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
-//        toolbar = view.findViewById(R.id.toolbar2);
-//
-//        toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
-//        // toolbar.setTitle(toolbar_name);
-//        // use default spinner item to show options in spinner
-//
-//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                onBackPressed();
-////                startActivity(new Intent(getApplicationContext(),DrawerActivity.class));
-//            }
-//        });
+
 
         btn_AddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -161,7 +149,8 @@ public class DetailPageFragment extends Fragment implements AdapterView.OnItemSe
                                         app_token=user.getUid();
                                         Log.d("app_token", "signInAnonymously:success"+app_token);
                                       ////  updateUI(user);
-                                        addToCartApi();
+                                        JSONAsyncTask_cart sync2=new JSONAsyncTask_cart();
+                                        sync2.execute();
 
                                     } else {
                                         // If sign in fails, display a message to the user.
@@ -175,7 +164,9 @@ public class DetailPageFragment extends Fragment implements AdapterView.OnItemSe
                                 }
                             });
                 }
-                                 else  addToCartApi();
+                                 else {
+                                     JSONAsyncTask_cart sync2=new JSONAsyncTask_cart();
+                                        sync2.execute();}
             }
         });
         spinner_dimension.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -233,7 +224,8 @@ public class DetailPageFragment extends Fragment implements AdapterView.OnItemSe
             }
         });
 
-        apiCallForDimensions();
+        JSONAsyncTask_demensions sync1=new JSONAsyncTask_demensions();
+        sync1.execute();
 
         quantity_List = new ArrayList<String>();
         quantity_List.add("1");
@@ -259,7 +251,7 @@ public class DetailPageFragment extends Fragment implements AdapterView.OnItemSe
 
     private void apiToCalculatePrice(final String dim1, final String height1,
                                      final String quantity1, final int position1) {
-        progressDoalog.show();
+      //  progressDoalog.show();
 
         requestQueue = Volley.newRequestQueue(context);
         final String url = "https://www.gladdenmattresses.com/api/jil.0.1/v2/product?urlname=" + list_url_name + "&pid=" + list_id + "&api_token=awbjNS6ocmUw0lweblc1FuvMqgUp3ayD8d3n0almUCYs";
@@ -319,7 +311,7 @@ public class DetailPageFragment extends Fragment implements AdapterView.OnItemSe
     void apiCallForDimensions() {
 
         // show it
-        progressDoalog.show();
+       // progressDoalog.show();
         requestQueue = Volley.newRequestQueue(context);
         final String url = "https://www.gladdenmattresses.com/api/jil.0.1/v2/product?urlname=" + list_url_name + "&pid=" + list_id + "&api_token=awbjNS6ocmUw0lweblc1FuvMqgUp3ayD8d3n0almUCYs";
         Log.i("apiCallForDimensions", url + "\n" + list_id + list_url_name);
@@ -776,7 +768,47 @@ public class DetailPageFragment extends Fragment implements AdapterView.OnItemSe
         };
         requestQueue.add(stringRequest);
     }
+    class JSONAsyncTask_cart extends AsyncTask<Void, Void, Boolean> {
 
 
+        @Override
+        protected Boolean doInBackground(Void... voids) {
+           addToCartApi();
+
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+
+        protected void onPostExecute(Boolean result) {
+
+        }
+    }
+    class JSONAsyncTask_demensions extends AsyncTask<Void, Void, Boolean> {
+
+
+        @Override
+        protected Boolean doInBackground(Void... voids) {
+            apiCallForDimensions();
+
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+
+        protected void onPostExecute(Boolean result) {
+
+        }
+    }
 
 }

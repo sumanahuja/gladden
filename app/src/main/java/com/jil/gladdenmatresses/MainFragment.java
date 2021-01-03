@@ -3,6 +3,7 @@ package com.jil.gladdenmatresses;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -59,6 +60,7 @@ public class MainFragment extends Fragment  {
     private ProgressDialog progressDoalog;
     private UserModel userModel;
     private MenuItem itemUser;
+    private View view;
     private ArrayList<String> list_title_cat;
     private ArrayList<String> list_image_cat, url_toCategoryListing, list_id_cat;
     private int dotsCount, flag;
@@ -72,7 +74,8 @@ public class MainFragment extends Fragment  {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_main, container, false);
+
+         view = inflater.inflate(R.layout.fragment_main, container, false);
         context = view.getContext();
         mViewPager = (ViewPager) view.findViewById(R.id.viewpager);
         //  mViewPager = (ViewPager) view.findViewById(R.id.viewpager);
@@ -85,134 +88,17 @@ public class MainFragment extends Fragment  {
         category_layout_top = view.findViewById(R.id.category_layout_top);
         progressDoalog = new ProgressDialog(context);
         progressDoalog.setMessage("Loading in progress...");
-        tv_subCat_heading = view.findViewById(R.id.tv_subCat_heading);
+       // tv_subCat_heading = view.findViewById(R.id.tv_subCat_heading);
 
 
         progressDoalog.show();
-        requestQueue = Volley.newRequestQueue(context);
-        final String url = "https://www.gladdenmattresses.com/api/jil.0.1/v2/cms/1/banner?api_token=awbjNS6ocmUw0lweblc1FuvMqgUp3ayD8d3n0almUCYs";
-        Log.i("slider_url", url);
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                progressDoalog.dismiss();
-                Log.i("slider_length", response.length() + "");
-                if (response.length() > 0) {
-
-                    //   Log.i("Market Listing Detail", response.toString());
-                    image_url = new String[response.length()];
-                    // Log.i("image size",image_url.length+"");
-                    for (int i = 0; i < response.length(); i++) {
-
-                        try {
-
-                            JSONObject object = response.getJSONObject(i);
-
-                            String SliderPhotos = object.getString("image");
-                            // Log.i("Slider Res", object.getString("image"));
-                            //image_url = new String[response.length()];
-                            image_url[i] = "https://www.gladdenmattresses.com/uploads/banner/" + object.getString("image");
-
-                        } catch (Exception e) {
-
-                            e.printStackTrace();
-                        }
-
-                    }
-                    try {
-
-                        adapter = new myCustomPagerAdapter(context, image_url);
-                        //  Log.i("myBitmap", myBitmap.toString());
-                        mViewPager.setAdapter(adapter);
-                        mViewPager.setCurrentItem(0);
-                     //   onPageSelected(mViewPager.getCurrentItem());
-                        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-                            @Override
-                            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                              //  onPageSelected(mViewPager.getCurrentItem());
-                            }
-
-                            @Override
-                            public void onPageSelected(int position) {
-                                for (int i = 0; i < dotsCount; i++) {
-                                    dots[i].setImageDrawable(getResources().getDrawable(R.drawable.nonselecteditem_dot));
-                                //    Toast.makeText(context, "onPageSelected1"+dotsCount, Toast.LENGTH_SHORT).show();
-                                }
-                                //Toast.makeText(context, "onPageSelected2"+dotsCount, Toast.LENGTH_SHORT).show();
-
-                                dots[position].setImageDrawable(getResources().getDrawable(R.drawable.selecteditem_dot));
-
-
-                            }
-
-                            @Override
-                            public void onPageScrollStateChanged(int state) {
-
-                            }
-                        });
-                        createAutoSliderShow();
-                        if (image_url.length <= 0) {
-
-                        } else {
-
-                            setPageViewIndicator();
-                        //    Toast.makeText(context, "else"+dotsCount, Toast.LENGTH_SHORT).show();
-                        }
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                } else {
-
-
-                }
-                Log.i("image_slider__", image_url.toString());
-
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-                progressDoalog.dismiss();
-            }
-
-        });
-        requestQueue.add(jsonArrayRequest);
+        tv_subCat_heading = view.findViewById(R.id.tv_subCat_heading);
+        JSONAsyncTask async=new JSONAsyncTask();
+        async.execute();
         tv_subCat_heading.setText("CATEGORIES");
-        apiCallForCMS();
-        apiToCallCategoriesImages();
-
 
         return view;
     }
-//
-//    @Override
-//    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-//
-//    }
-//
-//    @Override
-//    public void onPageSelected(int position) {
-//        // Log.i("onPageSelected", dotsCount + "");
-//
-//        for (int i = 0; i < dotsCount; i++) {
-//            dots[i].setImageDrawable(getResources().getDrawable(R.drawable.nonselecteditem_dot));
-//            Toast.makeText(context, "onPageSelected1"+dotsCount, Toast.LENGTH_SHORT).show();
-//        }
-//        Toast.makeText(context, "onPageSelected2"+dotsCount, Toast.LENGTH_SHORT).show();
-//
-//        dots[position].setImageDrawable(getResources().getDrawable(R.drawable.selecteditem_dot));
-//
-//
-//    }
-//
-//    @Override
-//    public void onPageScrollStateChanged(int state) {
-//
-//    }
-
     private void setPageViewIndicator() {
 
         //Log.d("###setPageViewIndicator", " : called");
@@ -273,7 +159,99 @@ public class MainFragment extends Fragment  {
             }
         }, 250, 2500);
     }
+void apiMain(){
+    requestQueue = Volley.newRequestQueue(context);
+    final String url = "https://www.gladdenmattresses.com/api/jil.0.1/v2/cms/1/banner?api_token=awbjNS6ocmUw0lweblc1FuvMqgUp3ayD8d3n0almUCYs";
+    Log.i("slider_url", url);
+    JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+        @Override
+        public void onResponse(JSONArray response) {
+            progressDoalog.dismiss();
+            Log.i("slider_length", response.length() + "");
+            if (response.length() > 0) {
 
+                //   Log.i("Market Listing Detail", response.toString());
+                image_url = new String[response.length()];
+                // Log.i("image size",image_url.length+"");
+                for (int i = 0; i < response.length(); i++) {
+
+                    try {
+
+                        JSONObject object = response.getJSONObject(i);
+
+                        String SliderPhotos = object.getString("image");
+                        // Log.i("Slider Res", object.getString("image"));
+                        //image_url = new String[response.length()];
+                        image_url[i] = "https://www.gladdenmattresses.com/uploads/banner/" + object.getString("image");
+
+                    } catch (Exception e) {
+
+                        e.printStackTrace();
+                    }
+
+                }
+                try {
+
+                    adapter = new myCustomPagerAdapter(context, image_url);
+                    //  Log.i("myBitmap", myBitmap.toString());
+                    mViewPager.setAdapter(adapter);
+                    mViewPager.setCurrentItem(0);
+                    //   onPageSelected(mViewPager.getCurrentItem());
+                    mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                        @Override
+                        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                            //  onPageSelected(mViewPager.getCurrentItem());
+                        }
+
+                        @Override
+                        public void onPageSelected(int position) {
+                            for (int i = 0; i < dotsCount; i++) {
+                                dots[i].setImageDrawable(getResources().getDrawable(R.drawable.nonselecteditem_dot));
+                                //    Toast.makeText(context, "onPageSelected1"+dotsCount, Toast.LENGTH_SHORT).show();
+                            }
+                            //Toast.makeText(context, "onPageSelected2"+dotsCount, Toast.LENGTH_SHORT).show();
+
+                            dots[position].setImageDrawable(getResources().getDrawable(R.drawable.selecteditem_dot));
+
+
+                        }
+
+                        @Override
+                        public void onPageScrollStateChanged(int state) {
+
+                        }
+                    });
+                    createAutoSliderShow();
+                    if (image_url.length <= 0) {
+
+                    } else {
+
+                        setPageViewIndicator();
+                        //    Toast.makeText(context, "else"+dotsCount, Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            } else {
+
+
+            }
+            Log.i("image_slider__", image_url.toString());
+
+
+        }
+    }, new Response.ErrorListener() {
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            error.printStackTrace();
+            progressDoalog.dismiss();
+        }
+
+    });
+    requestQueue.add(jsonArrayRequest);
+}
     void apiCallForCMS() {
         progressDoalog.show();
         requestQueue = Volley.newRequestQueue(context);
@@ -288,7 +266,7 @@ public class MainFragment extends Fragment  {
 //                    response = response.getJSONObject("data");
 //                    Log.i("response", response.getString("disp_name") + "\n" + Html.fromHtml(response.getString("description")));
 
-                    cmsHead.setText(response.getString("title"));
+                    cmsHead.setText(response.getString("title")+"");
                     cmsDetail.setText(Html.fromHtml(response.getString("description")));
                     if (!response.getString("image").isEmpty())
                         Picasso.with(context)
@@ -361,7 +339,7 @@ public class MainFragment extends Fragment  {
                             //  myBitmap[k]=Bitmap.createBitmap(myBitmap[k],500,500, Bitmap.Config.ARGB_8888);
                             //Iv.setImageBitmap(myBitmap[k]);
                             Picasso.with(context).load(list_image_cat1[k])
-                                    .resize(800, 600)
+                                    .resize(900, 600)
                                     .into(Iv);
                             // Iv.setTooltipText(list_title_cat.get(k)+"");
                             //tv.setId(i);
@@ -489,5 +467,27 @@ public class MainFragment extends Fragment  {
             ft.commit();
         }
     }
+    class JSONAsyncTask extends AsyncTask<Void, Void, Boolean> {
 
+
+        @Override
+        protected Boolean doInBackground(Void... voids) {
+
+            apiMain();
+            apiCallForCMS();
+            apiToCallCategoriesImages();
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+
+        protected void onPostExecute(Boolean result) {
+
+        }
+    }
 }

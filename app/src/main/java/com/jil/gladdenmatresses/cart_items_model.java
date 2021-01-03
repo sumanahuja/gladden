@@ -4,8 +4,14 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class cart_items_model implements Parcelable {
-    private String list_id,list_url,image_url, list_title,list_code,list_price,list_total_price,list_specifications,list_quantity;
+    public String getCart_id() {
+        return cart_id;
+    }
+
+    private String item_id,cart_id,list_id,list_url,image_url, list_title,list_code,list_price,list_total_price,list_specifications,list_quantity;
     protected cart_items_model(Parcel in) {
+        item_id= in.readString();
+        cart_id=in.readString();
         list_id = in.readString();
         list_url = in.readString();
         image_url = in.readString();
@@ -19,6 +25,8 @@ public class cart_items_model implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(item_id);
+        dest.writeString(cart_id);
         dest.writeString(list_id);
         dest.writeString(list_url);
         dest.writeString(image_url);
@@ -85,7 +93,9 @@ public class cart_items_model implements Parcelable {
         return list_quantity;
     }
 
-    public cart_items_model(String list_id, String list_url, String image_url, String list_title, String list_code, String list_price, String list_total_price, String list_specifications, String list_quantity) {
+    public cart_items_model(String item_id,String cart_id,String list_id, String list_url, String image_url, String list_title, String list_code, String list_price, String list_total_price, String list_specifications, String list_quantity) {
+        this.item_id = item_id;
+        this.cart_id = cart_id;
         this.list_id = list_id;
         this.list_url = list_url;
         this.image_url = image_url;
@@ -98,4 +108,7 @@ public class cart_items_model implements Parcelable {
     }
 
 
+    public String getItem_id() {
+        return item_id;
+    }
 }

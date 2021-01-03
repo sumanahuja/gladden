@@ -75,7 +75,7 @@ public class CartBasketFragment extends Fragment {
                 }
                 if (response.length() > 0) {
 
-                    //   Log.i("Market Listing Detail", response.toString());
+                       Log.i("cart", response.toString());
                   //  image_url = new String[response.length()];
                      Log.i("cart_items",response.length()+"");
                     Toast.makeText(context, ""+response.length(), Toast.LENGTH_SHORT).show();
@@ -85,7 +85,8 @@ public class CartBasketFragment extends Fragment {
                         try {
 
                             JSONObject object = response.getJSONObject(i);
-                            String list_id = object.getString("id");
+                            String item_id = object.getString("id");
+                            String cart_id = object.getString("cart_id");
                             String img_URL = object.getString("image");
                             String p_name=object.getString("product_name");
                             int j=0;
@@ -118,7 +119,7 @@ list_url=list_url.toLowerCase();
                                  p_dimenssion = dimenssion_obj.getString("title");
                             }
                             String total=p_price.isEmpty()?"":(Double.parseDouble(p_quantity)*Double.parseDouble(p_price)+"");
-                            cart_model=new cart_items_model(p_id, list_url, img_URL,p_name, p_code, p_price,total,  p_dimenssion+", "+p_height,  p_quantity);
+                            cart_model=new cart_items_model(item_id,cart_id,p_id, list_url, img_URL,p_name, p_code, p_price,total,  p_dimenssion+", "+p_height,  p_quantity);
                             cart_items_list.add(cart_model);
                             Log.i("added_in_list1",list_url+"   "+p_id );
                             Log.i("added_in_list",cart_items_list.size()+"");

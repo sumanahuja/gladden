@@ -83,7 +83,7 @@ public class DetailPageFragment extends Fragment implements AdapterView.OnItemSe
     private ProgressDialog progressDoalog;
     private Context context;
     private  int position1;
-    private  String dim,height,quantity,product_id,app_token,USER_ID;
+    private  String dim_id,height_id, dim,height,quantity,product_id,app_token,USER_ID;
     private FirebaseAuth mAuth;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -147,6 +147,8 @@ public class DetailPageFragment extends Fragment implements AdapterView.OnItemSe
 
                                         FirebaseUser user = mAuth.getCurrentUser();
                                         app_token=user.getUid();
+
+
                                         Log.d("app_token", "signInAnonymously:success"+app_token);
                                       ////  updateUI(user);
                                         JSONAsyncTask_cart sync2=new JSONAsyncTask_cart();
@@ -179,7 +181,7 @@ public class DetailPageFragment extends Fragment implements AdapterView.OnItemSe
               quantity = quantity_List.get(spinner_quantity.getSelectedItemPosition());
                 //  Log.i("onItemSelected",position+"\n"+height);
                 apiToCalculatePrice(dim, height, quantity, position1);
-
+                Log.i("quantity_1",quantity);
 
             }
 
@@ -192,12 +194,12 @@ public class DetailPageFragment extends Fragment implements AdapterView.OnItemSe
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 final int position1 = position;
-                String dim = dim_list.get(spinner_dimension.getSelectedItemPosition());
-                String height = height_value_List.get(spinner_height.getSelectedItemPosition()).toString();
-                String quantity = quantity_List.get(spinner_quantity.getSelectedItemPosition());
+                 dim = dim_list.get(spinner_dimension.getSelectedItemPosition());
+                 height = height_value_List.get(spinner_height.getSelectedItemPosition()).toString();
+                 quantity = quantity_List.get(spinner_quantity.getSelectedItemPosition());
                 //  Log.i("onItemSelected",position+"\n"+height);
                 apiToCalculatePrice(dim, height, quantity, position1);
-
+                Log.i("quantity_2",quantity);
             }
 
             @Override
@@ -209,12 +211,12 @@ public class DetailPageFragment extends Fragment implements AdapterView.OnItemSe
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 final int position1 = position;
-                String dim = dim_list.get(spinner_dimension.getSelectedItemPosition());
-                String height = height_value_List.get(spinner_height.getSelectedItemPosition()).toString();
-                String quantity = quantity_List.get(spinner_quantity.getSelectedItemPosition());
+                 dim = dim_list.get(spinner_dimension.getSelectedItemPosition()).toString();
+                 height = height_value_List.get(spinner_height.getSelectedItemPosition()).toString();
+                 quantity = quantity_List.get(spinner_quantity.getSelectedItemPosition()).toString();
                 //  Log.i("onItemSelected",position+"\n"+height);
                 apiToCalculatePrice(dim, height, quantity, position1);
-
+Log.i("quantity_3",quantity);
 
             }
 
@@ -255,6 +257,7 @@ public class DetailPageFragment extends Fragment implements AdapterView.OnItemSe
 
         requestQueue = Volley.newRequestQueue(context);
         final String url = "https://www.gladdenmattresses.com/api/jil.0.1/v2/product?urlname=" + list_url_name + "&pid=" + list_id + "&api_token=awbjNS6ocmUw0lweblc1FuvMqgUp3ayD8d3n0almUCYs";
+       Log.i("price_url",url);
         Log.i("apiToCalculatePrice", url + "\n" + list_id + list_url_name);
         JsonObjectRequest object = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
@@ -271,11 +274,14 @@ public class DetailPageFragment extends Fragment implements AdapterView.OnItemSe
                         J_dimension[i] = jsonArray.getJSONObject(i).getJSONObject("dimension").getString("title");
                         J_height[i] = jsonArray.getJSONObject(i).getJSONObject("height").getString("height");
                         J_price[i] = jsonArray.getJSONObject(i).getString("price");
-                        Log.i("HH", J_dimension[i] + J_height[i] + J_price[i]);
+                      //  Log.i("HH", J_dimension[i] + J_height[i] + J_price[i]);
                         if (dim1.equals(J_dimension[i]) && height1.equals(J_height[i])) {
                             String PRICE = Float.parseFloat(J_price[i]) * Integer.parseInt(quantity1) + "";
                             tv_price.setText(PRICE);
-                            Log.i("PRICE", PRICE);
+                            dim_id = jsonArray.getJSONObject(i).getJSONObject("dimension").getInt("id")+"";
+                            height_id = jsonArray.getJSONObject(i).getJSONObject("height").getInt("id")+"";
+
+                            //Log.i("PRICE", PRICE);
                         }
 
                     }
@@ -741,13 +747,13 @@ public class DetailPageFragment extends Fragment implements AdapterView.OnItemSe
                     USER_ID="";
                 }
 
-               Log.i("map",USER_ID+app_token+"\t"+dim+"\t"+height+"\t"+quantity+"\t"+product_id+"\t"+list_url_name);
+               Log.i("map",USER_ID+app_token+"\t dim"+dim+"\theight"+height+"\t qty"+quantity+"\t"+product_id+"\t"+list_url_name);
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("app_token",app_token);
                 params.put("user_id",USER_ID);
                 params.put("colour", "45");
-                params.put("dimension",dim );
-                params.put("height", height);
+                params.put("dimension",dim_id );
+                params.put("height", height_id);
                 params.put("qty", quantity);
                 params.put("product_id", product_id);
                 params.put("urlname", list_url_name);

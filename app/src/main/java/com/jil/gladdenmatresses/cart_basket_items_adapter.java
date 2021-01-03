@@ -3,6 +3,7 @@ package com.jil.gladdenmatresses;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,10 +12,22 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,7 +35,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class cart_basket_items_adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Activity mActivity;
     private Context context;
-
+    private String USER_ID,app_token,cart_id;
     private ArrayList<cart_items_model> exampleItems;
 
     public cart_basket_items_adapter(View view ,Activity activity, ArrayList<cart_items_model> exampleList) {
@@ -107,14 +120,77 @@ public class cart_basket_items_adapter extends RecyclerView.Adapter<RecyclerView
             @Override
             public void onClick(View v) {
 
-//                Intent i = new Intent(mActivity, DrawerActivity.class);
-//                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                i.putExtra("open", "detailpage");
-//                i.putExtra("list_id",   current.getList_id());
-//                i.putExtra("list_url_name", current.getList_url_name());
-//                Log.i("DDD",current.getList_id()+current.getList_url_name());
-//                // Now start your activity
-//                context.startActivity(i);
+                String url = "https://www.gladdenmattresses.com/api/jil.0.1/v2/cart/delete?api_token=awbjNS6ocmUw0lweblc1FuvMqgUp3ayD8d3n0almUCYs";
+Log.i("delete_url",url);
+                RequestQueue requestQueue = Volley.newRequestQueue(context);
+
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try {
+                            Log.i("Response_Delete_Item", response);
+//                            JSONObject jsonObject = new JSONObject(response);
+//                            if (jsonObject.getString("status").equals("true")) {
+//                                Toast.makeText(context, "add to card , total items" + jsonObject.getString("totalitems"), Toast.LENGTH_SHORT).show();
+//                                SharedPreferences prefs = context.getSharedPreferences("data", 0);
+//                                SharedPreferences.Editor editor = prefs.edit();
+//                                editor.putString("app_token", app_token);
+//                                editor.putString("cart_id", jsonObject.getString("cart_id"));
+//                                editor.apply();
+//
+//                            } else if (jsonObject.getString("status").equals("false")) {
+//                                //   Toast.makeText(context, "" + jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(context, "" + jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
+//
+//                            }
+//
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                    }
+                }) {
+                    @Override
+                    protected Map<String, String> getParams() {
+                        SharedPreferences prefs = context.getSharedPreferences("data", 0);
+                        cart_id=prefs.getString("cart_id","");
+                        //  getData();
+                        UserModel u;
+                        try {
+
+                            mySharedPrefClass user = new mySharedPrefClass(context);
+                            u= user.get_data();
+                            USER_ID=u.getId()+"";
+                            app_token="test";
+                        }catch(Exception e){
+                            e.printStackTrace();
+                            USER_ID="";
+                            //SharedPreferences prefs = context.getSharedPreferences("data", 0);
+                            app_token=prefs.getString("app_token","");
+                             //cart_id=prefs.getString("cart_id","");
+                        }
+                        String URL="https://www.gladdenmattresses.com/api/jil.0.1/v2/cart/delete?api_token=awbjNS6ocmUw0lweblc1FuvMqgUp3ayD8d3n0almUCYs"+",app_token=" +app_token + ",user_id=" +USER_ID+ ",cart_id=" +cart_id+",cart_item_id=" +current.getItem_id()+ ",product_id="+ current.getList_id();
+                      Log.i("URL1",URL);
+                       Map<String, String> params = new HashMap<String, String>();
+                        params.put("app_token",app_token);
+                        params.put("user_id",USER_ID);
+                        params.put("cart_id", cart_id);
+                        params.put("cart_item_id",current.getItem_id() );
+                        params.put("product_id", current.getList_id());
+                        //params.put("api_token", "awbjNS6ocmUw0lweblc1FuvMqgUp3ayD8d3n0almUCYs");
+Log.i("map", "app_token" +app_token + "user_id" +USER_ID+ "cart_id" +cart_id+"cart_item_id" +current.getItem_id()+ "product_id"+ current.getList_id());
+                        return params;
+                    }
+                };
+                requestQueue.add(stringRequest);
+
 
             }
         });

@@ -11,6 +11,6 @@
     <color name="bg1">#b9edbd</color>
     <color name="bg2">#ccf1ff</color>
     <color name="features_bg">#CC3300</color>
-
+    <color name="tansparent">#00000000</color>
 
 </resources>

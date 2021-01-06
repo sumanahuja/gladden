@@ -55,6 +55,7 @@ public class LoginFragment extends Fragment {
     private GoogleSignInClient mGoogleSignInClient;
     private int RC_SIGN_IN=000,flag,id;
     private Context context;
+
     private GoogleSignInAccount account;
     private View view;
     private EditText edtLoginId,edtLoginPass;

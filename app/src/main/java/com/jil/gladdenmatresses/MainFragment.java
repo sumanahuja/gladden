@@ -205,14 +205,19 @@ void apiMain(){
 
                         @Override
                         public void onPageSelected(int position) {
+                            try {
                             for (int i = 0; i < dotsCount; i++) {
-                                dots[i].setImageDrawable(getResources().getDrawable(R.drawable.nonselecteditem_dot));
+
+
+
+                                    dots[i].setImageDrawable(getResources().getDrawable(R.drawable.nonselecteditem_dot));
+
                                 //    Toast.makeText(context, "onPageSelected1"+dotsCount, Toast.LENGTH_SHORT).show();
                             }
                             //Toast.makeText(context, "onPageSelected2"+dotsCount, Toast.LENGTH_SHORT).show();
 
                             dots[position].setImageDrawable(getResources().getDrawable(R.drawable.selecteditem_dot));
-
+                            }catch(Exception e){e.printStackTrace();}
 
                         }
 

@@ -10,6 +10,7 @@
     <string name="subject">Subject:</string>
     <string name="website">Website:</string>
     <string name="message">Enter Your Message:</string>
+    <string name="Rs">\u20B9</string>
 
     <string name="phonename">+91 8588828663</string>
     <string name="emailname">Enquiry@gladdenmattresses.com</string>

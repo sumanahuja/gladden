@@ -1,5 +1,6 @@
 package com.jil.gladdenmatresses;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -36,6 +37,7 @@ public class CartBasketFragment extends Fragment {
    private cart_items_model cart_model;
    private ArrayList<cart_items_model> cart_items_list;
    private View view;
+    private ProgressDialog progressDialog;
 
     public CartBasketFragment() {
         // Required empty public constructor
@@ -51,7 +53,8 @@ public class CartBasketFragment extends Fragment {
         context=view.getContext();
         recyclerView=view.findViewById(R.id.recycler_cart_items);
         cart_items_list=new ArrayList<cart_items_model>();
-
+        progressDialog = new ProgressDialog(context);
+        progressDialog.setMessage("Loading in progress...");
         //iv_product=view.findViewById(R.id.img_product);
         getPrefs();
         try {
@@ -61,6 +64,7 @@ public class CartBasketFragment extends Fragment {
         }catch (Exception e){e.printStackTrace();}
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
+        progressDialog.show();
         final String url = "https://www.gladdenmattresses.com/api/jil.0.1/v2/cart/get?app_token="+app_token+"&user_id="+user_id+"&cart_id="+cart_id+"&api_token=awbjNS6ocmUw0lweblc1FuvMqgUp3ayD8d3n0almUCYs";
         Log.i("slider_url", url);
         JsonObjectRequest objectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
@@ -69,6 +73,7 @@ public class CartBasketFragment extends Fragment {
                 Log.i("response_size", r.length() + "");
                 JSONArray response = null;
                 try {
+                    progressDialog.dismiss();
                     response = r.getJSONArray("cartItems");
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -89,19 +94,20 @@ public class CartBasketFragment extends Fragment {
                             String cart_id = object.getString("cart_id");
                             String img_URL = object.getString("image");
                             String p_name=object.getString("product_name");
-                            int j=0;
-                            String list_url="";
-                            char []c=new char[p_name.length()];
-                            while(j<p_name.length()){
-                                if(" ".equals(p_name.charAt(j)+""))
-                                {c[j]='-';}
-                                else
-                                    c[j]=p_name.charAt(j);
-                                Log.i("C=",c[j]+"");
-                                list_url=list_url+c[j]+"";
-                                j++;
-                            }
-list_url=list_url.toLowerCase();
+                           String list_url= object.getJSONObject("product").getString("url_name");
+//                            int j=0;
+//                            String list_url="";
+//                            char []c=new char[p_name.length()];
+//                            while(j<p_name.length()){
+//                                if(" ".equals(p_name.charAt(j)+""))
+//                                {c[j]='-';}
+//                                else
+//                                    c[j]=p_name.charAt(j);
+//                                //Log.i("C=",c[j]+"");
+//                                list_url=list_url+c[j]+"";
+//                                j++;
+//                            }
+//list_url=list_url.toLowerCase();
                             String p_code="SKU: "+object.getString("sku");
                             String p_price="";
                             if(!object.getString("price").equals("null")){
@@ -153,6 +159,7 @@ list_url=list_url.toLowerCase();
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
+                progressDialog.dismiss();
             }
 
         });

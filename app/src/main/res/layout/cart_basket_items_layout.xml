@@ -35,31 +35,42 @@
                 android:id="@+id/tv_product_code"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/Gray"
                 android:text="TextView" />
 
             <TextView
                 android:id="@+id/tv_product_specifications"
                 android:layout_width="wrap_content"
+                android:textColor="@color/Gray"
                 android:layout_height="wrap_content"
                 android:text="TextView" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="4"
-                android:gravity="center"
                 android:orientation="horizontal">
                 <TextView
                     android:id="@+id/tv_product_price"
                     android:layout_width="wrap_content"
-
+                    android:textStyle="bold"
+                    android:textSize="16sp"
                     android:padding="2dp"
                     android:layout_height="wrap_content"
                     android:text="TextView" />
-
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:textStyle="bold"
+                    android:paddingLeft="4dp"
+                    android:paddingBottom="2dp"
+                    android:paddingTop="2dp"
+                    android:layout_height="wrap_content"
+                    android:text="Qty:" />
                 <EditText
                     android:id="@+id/tv_product_quantity"
                     android:layout_width="wrap_content"
-                    android:padding="2dp"
+                    android:paddingRight="6dp"
+                    android:paddingBottom="2dp"
+                    android:paddingTop="2dp"
                     android:layout_height="wrap_content"
 
                     />
@@ -68,13 +79,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="2dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
 
                     android:text="TextView" />
-                <ImageView
+                <ImageButton
                     android:id="@+id/img_product_delete"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:clickable="true"
+                    android:padding="2dp"
+                    android:background="@color/tansparent"
                     android:src="@drawable/ic_delete" />
             </LinearLayout>
         </LinearLayout>

@@ -1,6 +1,7 @@
 package com.jil.gladdenmatresses;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +22,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.JsonObject;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -37,6 +40,7 @@ public class cart_basket_items_adapter extends RecyclerView.Adapter<RecyclerView
     private Context context;
     private String USER_ID,app_token,cart_id;
     private ArrayList<cart_items_model> exampleItems;
+    private ProgressDialog progressDialog;
 
     public cart_basket_items_adapter(View view ,Activity activity, ArrayList<cart_items_model> exampleList) {
      this.mActivity = activity;
@@ -63,11 +67,14 @@ public class cart_basket_items_adapter extends RecyclerView.Adapter<RecyclerView
         return exampleItems == null ? 0 : exampleItems.size();
     }
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        ImageView imageView,img_delete;
+        ImageView imageView;
+        ImageButton img_delete;
         TextView tv_heading,tv_code,tv_price,tv_total_price,tv_product_specifications;
         EditText et_quantity;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+            progressDialog = new ProgressDialog(context);
+            progressDialog.setMessage("Loading in progress...");
             imageView=itemView.findViewById(R.id.img_product);
             tv_heading=itemView.findViewById(R.id.tv_product_name);
             tv_code=itemView.findViewById(R.id.tv_product_code);
@@ -96,7 +103,9 @@ public class cart_basket_items_adapter extends RecyclerView.Adapter<RecyclerView
         Picasso.with(context).load(image_url).fit().into(holder.imageView);
         holder.tv_heading.setText(list_title);
         holder.tv_code.setText(list_code);
+        list_price=context.getResources().getString(R.string.Rs)+list_price;
         holder.tv_price.setText(list_price);
+        list_total_price=context.getResources().getString(R.string.Rs)+list_total_price;
         holder.tv_total_price.setText(list_total_price);
         holder.tv_product_specifications.setText(list_specifications);
         holder.et_quantity.setText(list_quantity);
@@ -104,6 +113,7 @@ public class cart_basket_items_adapter extends RecyclerView.Adapter<RecyclerView
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressDialog.show();
                 Log.i("DDD",current.getList_id()+current.getList_url());
                 Intent i = new Intent(mActivity, DrawerActivity.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -119,7 +129,7 @@ public class cart_basket_items_adapter extends RecyclerView.Adapter<RecyclerView
         holder.img_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                progressDialog.show();
                 String url = "https://www.gladdenmattresses.com/api/jil.0.1/v2/cart/delete?api_token=awbjNS6ocmUw0lweblc1FuvMqgUp3ayD8d3n0almUCYs";
 Log.i("delete_url",url);
                 RequestQueue requestQueue = Volley.newRequestQueue(context);
@@ -129,7 +139,15 @@ Log.i("delete_url",url);
                     public void onResponse(String response) {
 
                         try {
+                            progressDialog.dismiss();
                             Log.i("Response_Delete_Item", response);
+                            JSONObject res=new JSONObject(response);
+                            if(res.getString("status").equals("1"))
+                            {
+                                res.getString("totalitems");
+                                Toast.makeText(context, "Item deleted successfully", Toast.LENGTH_SHORT).show();
+                                notifyDataSetChanged();
+                            }
 //                            JSONObject jsonObject = new JSONObject(response);
 //                            if (jsonObject.getString("status").equals("true")) {
 //                                Toast.makeText(context, "add to card , total items" + jsonObject.getString("totalitems"), Toast.LENGTH_SHORT).show();
@@ -148,13 +166,14 @@ Log.i("delete_url",url);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-
+                        notifyDataSetChanged();
                     }
 
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
+                        progressDialog.dismiss();
                     }
                 }) {
                     @Override
@@ -195,4 +214,5 @@ Log.i("map", "app_token" +app_token + "user_id" +USER_ID+ "cart_id" +cart_id+"ca
             }
         });
     }
+
 }

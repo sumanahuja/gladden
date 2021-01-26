@@ -83,7 +83,7 @@ public class CartBasketFragment extends Fragment {
                        Log.i("cart", response.toString());
                   //  image_url = new String[response.length()];
                      Log.i("cart_items",response.length()+"");
-                    Toast.makeText(context, ""+response.length(), Toast.LENGTH_SHORT).show();
+               //     Toast.makeText(context, ""+response.length(), Toast.LENGTH_SHORT).show();
                   //  image_url=new String[response.length()];
                     for (int i = 0; i < response.length(); i++) {
 

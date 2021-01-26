@@ -708,7 +708,7 @@ Log.i("quantity_3",quantity);
 
                     JSONObject jsonObject = new JSONObject(response);
                     if (jsonObject.getString("status").equals("true")) {
-                        Toast.makeText(context, "add to card , total items" + jsonObject.getString("totalitems"), Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(context, "add to card , total items" + jsonObject.getString("totalitems"), Toast.LENGTH_SHORT).show();
                         SharedPreferences prefs = context.getSharedPreferences("data", 0);
                         SharedPreferences.Editor editor = prefs.edit();
                         editor.putString("app_token", app_token);

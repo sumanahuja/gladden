@@ -85,8 +85,7 @@ public class DrawerActivity extends AppCompatActivity implements  NavigationView
 
     ArrayList<product_category_model> data;
     int  flag;
-    private int mCartItemCount = 1;
-
+    private int mCartItemCount = 0;
     String  PID = "1", product_name = "mattresses", toolbar_name = "Gladden Mattresses", openFragment = "";
 
     private String url, banner_url;
@@ -99,7 +98,24 @@ public class DrawerActivity extends AppCompatActivity implements  NavigationView
 
             View actionView = menuItem.getActionView();
         textCartItemCount = (TextView) actionView.findViewById(R.id.cart_badge);
+        try{
+            UserModel um = mySharedPrefClass.getInstance(getApplicationContext()).get_data();
+            Log.i("BADGE0", um.getFull_name() + ""+ um.getId());
+            if(um.getFull_name().length()>0) {
+               String str="0";
 
+                      str= getBadgeOldValue(um.getId() + "");
+
+             //   mCartItemCount = Integer.parseInt(str);
+               // Log.i("BADGE000", getBadgeOldValue(um.getId() + "")+ "");
+            }
+        }catch(Exception e){e.printStackTrace();
+            UserModel um=null;
+            Log.i("entered badge exception","true");
+            //    mCartItemCount=0;
+        }
+        //  if()
+        Log.i("BADGE00",mCartItemCount+"");
         setupBadge(getBadgeCount()+mCartItemCount);
 
         actionView.setOnClickListener(new View.OnClickListener() {
@@ -171,7 +187,7 @@ public class DrawerActivity extends AppCompatActivity implements  NavigationView
             Log.i("DDD@",list_id+list_url_name);
         }
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+    Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -195,7 +211,8 @@ public class DrawerActivity extends AppCompatActivity implements  NavigationView
         progressDoalog = new ProgressDialog(DrawerActivity.this);
         progressDoalog.setMessage("Loading in progress...");
 
-        toolbar_logo.setOnClickListener(new View.OnClickListener() {
+
+    toolbar_logo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(),DrawerActivity.class));
@@ -267,6 +284,46 @@ public class DrawerActivity extends AppCompatActivity implements  NavigationView
         initListData();
 
 
+    }
+
+    private String getBadgeOldValue(String id) {
+        progressDoalog.show();
+        final String[] itemCount = {""};
+        requestQueue = Volley.newRequestQueue(getApplicationContext());
+        String url2 = "https://www.gladdenmattresses.com/api/jil.0.1/v2/cart/get?app_token=test&user_id="+id+"&&api_token=awbjNS6ocmUw0lweblc1FuvMqgUp3ayD8d3n0almUCYs";
+                //"https://www.gladdenmattresses.com/api/jil.0.1/v2/categories?tlevel=" + ids[i] + "&api_token=awbjNS6ocmUw0lweblc1FuvMqgUp3ayD8d3n0almUCYs";
+        Log.i("BADGEurl", url2);
+        JsonObjectRequest objectRequest1 = new JsonObjectRequest(Request.Method.GET, url2, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+progressDoalog.dismiss();
+                try {
+                     if(response.getString("status").equals("true"))
+                    {
+                          itemCount[0] = response.get("cartItemsCount").toString();
+                          Log.i("BADGE_RES",itemCount[0]+"");
+                    }
+                     else {
+                         itemCount[0] ="0";
+                     }
+                    mCartItemCount=Integer.parseInt(itemCount[0]);
+                     setupBadge(mCartItemCount);
+                    Log.i("BADGE_RES",mCartItemCount+"");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                progressDoalog.dismiss();
+            }
+        });
+        requestQueue.add(objectRequest1);
+return itemCount[0];
     }
 
 
@@ -636,7 +693,7 @@ public class DrawerActivity extends AppCompatActivity implements  NavigationView
        return Integer.parseInt(textCartItemCount.getText().toString());
     }
     public void setupBadge(int mCartItemCount1) {
-
+        Log.i("BADGE",mCartItemCount+"");
         if (textCartItemCount != null) {
             if (mCartItemCount1 == 0) {
                 if (textCartItemCount.getVisibility() != View.GONE) {
@@ -650,6 +707,7 @@ public class DrawerActivity extends AppCompatActivity implements  NavigationView
 
                 }
             }
+            Log.i("BADGE2",mCartItemCount+"");
         }
     }
     @Override
